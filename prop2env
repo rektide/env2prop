@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+function propToEnv( prop){
+	var val= []
+	for(var i= 0; i< prop.length; ++i){
+		var
+		  chr= prop.charAt(i),
+		  upper= chr.toUpperCase()
+
+		if(upper === chr){
+			val.push("_")
+		}
+		val.push(upper)
+	}
+	return val.join("")
+}
+
+module.exports= propToEnv
+module.exports.PropToEnv= propToEnv
+module.exports.default= propToEnv
+
+if(require.main=== module){
+	for(var i= 2; i< process.argv.length; ++i){
+		console.log(propToEnv(process.argv[i]))
+	}
+}

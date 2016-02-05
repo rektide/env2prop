@@ -1,0 +1,19 @@
+{
+	"name": "env2prop",
+	"version": "1.0.0",
+	"description": "Bidirectional mapping for ENVIRONMETAL_VARIABLE <-> environmentalVariable",
+	"main": "env2prop",
+	"bins": {
+		"env2prop": "env2prop",
+		"prop2env": "prop2env"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://archive.voodoowarez.com/env2prop"
+	},
+	"author": "rektide de la faye",
+	"license": "X"
+}

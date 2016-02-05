@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+function envToProp( env){
+	var fragments = env.split( "_")
+	for(var i= 0; i< fragments.length; ++i){
+		var fragment= fragments[ i].toLowerCase()
+		if(i > 0){
+			fragment= fragment.charAt( 0).toUpperCase() + fragment.substring( 1)
+		}
+		fragments[i]= fragment
+	}
+	return fragments.join( "")
+}
+
+module.exports= envToProp
+module.exports.EnvToProp= envToProp
+module.exports.default= envToProp
+
+var propToEnv
+Object.defineProperty( module.exports, "PropToEnv", {
+	get: function(){
+		return propToEnv || (propTopToEnv = require("./prop2env"))
+	},
+	enumerable: true
+})
+
+if(require.main=== module){
+	for(var i= 2; i< process.argv.length; ++i){
+		console.log(envToProp(process.argv[i]))
+	}
+}
