@@ -1,6 +1,6 @@
 {
 	"name": "env2prop",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Bidirectional mapping for ENVIRONMETAL_VARIABLE <-> environmentalVariable",
 	"main": "env2prop",
 	"bins": {
