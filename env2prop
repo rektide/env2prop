@@ -5,6 +5,7 @@ function envToProp( opts){
 	var
 	  prefixes= opts&& opts.prefixes&& opts.prefixes.map( p=> new RegExp( p, "i"))
 	return function envToProp( env){
+		env= env|| process.env
 		var
 		  fragments = env.split( "_"),
 		  first= fragments[0],
