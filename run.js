@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict"
 
 var env2prop= require("./env2prop")
@@ -7,10 +8,10 @@ function run(opts){
 	  envs= opts&& opts.envs|| process.env
 	return function mapTo(o){
 		o= o|| {}
-		for(var i in env){
+		for(var i in envs){
 			var
 			  key= env2prop(i),
-			  val= env[i]
+			  val= envs[i]
 			o[key]= val
 		}
 		return o
@@ -23,13 +24,14 @@ function main(){
 	  json= JSON.stringify(r)
 	console.log(json)
 }
-
-if(require.main=== module){
-	module.exports.main()
-}
-
 module.exports= function run(){
 	return module.exports.run()
 }
 module.exports.run= run
 module.exports.main= main
+
+if(require.main=== module){
+	module.exports.main()
+}
+
+
