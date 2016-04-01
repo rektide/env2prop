@@ -16,3 +16,20 @@ function run(opts){
 		return o
 	}
 }
+
+function main(){
+	var
+	  r= module.exports.run()(),
+	  json= JSON.stringify(r)
+	console.log(json)
+}
+
+if(require.main=== module){
+	module.exports.main()
+}
+
+module.exports= function run(){
+	return module.exports.run()
+}
+module.exports.run= run
+module.exports.main= main
