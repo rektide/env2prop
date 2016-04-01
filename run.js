@@ -55,13 +55,14 @@ function filter(fileStat){
 function autoPrefix( opts){
 	var
 	  dir= opts&& opts.dir|| process.cwd(),
-	  pre= opts&& opts.prefixes
+	  pre= opts&& opts.prefixes,
+	  r= opts&& opts.run|| run
 	return findDirs( dir).then( dirs=> {
 		var
 		  prefixes= pre? dirs.concat(pre): dirs,
 		  opts= { prefixes},
-		  r= run( opts)
-		return r
+		  val= r( opts)
+		return val
 	})
 }
 
