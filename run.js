@@ -5,15 +5,21 @@ var env2prop= require("./env2prop")
 
 function run(opts){
 	var
-	  envs= opts&& opts.envs|| process.env
+	  envs= opts&& opts.envs|| process.env,
+	  e2p= env2prop({prefixes: opts&& opts.prefixes})
 	return function mapTo(o){
 		o= o|| {}
 		for(var i in envs){
 			var
-			  key= env2prop(i, opts),
+			  p= e2p(i, opts),
+			  key= p,
 			  val= envs[i],
-			  prefix= key[1] && key[1].toLowerCase(),
-			  target= prefix? (o[prefix]|| (o[prefix]= {})): o
+			  prefix= key[1],
+			  target= o
+			if(prefix){
+				target= o[prefix]|| (o[prefix]= {})
+				key= key[0]
+			}
 			target[key]= val
 		}
 		return o

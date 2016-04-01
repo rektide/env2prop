@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 "use strict"
 
-function envToProp(opts){
+function envToProp( opts){
 	var
-	  prefixes= opts&& opts.prefixes&& opts.prefixes.map(p=> new RegExp(p, "i")),
-	return function envToProp(env){
+	  prefixes= opts&& opts.prefixes&& opts.prefixes.map( p=> new RegExp( p, "i"))
+	return function envToProp( env){
 		var
 		  fragments = env.split( "_"),
 		  first= fragments[0],
-		  prefixIndex= prefixes&& prefixes.filter(p=> p.test(first)),
-		  prefix= prefixIndex!== -1 && prefixes[prefixIndex]
-		if(prefix){
-			fragments.shift()
+		  prefixIndexes= prefixes&& prefixes.filter(p=> p.test(first)),
+		  prefix= null
+		if(prefixIndexes.length){
+			prefix= fragments.shift().toLowerCase()
 		}
 		for(var i= 0; i< fragments.length; ++i){
 			var
