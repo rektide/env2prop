@@ -10,9 +10,11 @@ function run(opts){
 		o= o|| {}
 		for(var i in envs){
 			var
-			  key= env2prop(i),
-			  val= envs[i]
-			o[key]= val
+			  key= env2prop(i, opts),
+			  val= envs[i],
+			  prefix= key[1] && key[1].toLowerCase(),
+			  target= prefix? (o[prefix]|| (o[prefix]= {})): o
+			target[key]= val
 		}
 		return o
 	}
@@ -20,12 +22,14 @@ function run(opts){
 
 function main(){
 	var
-	  r= module.exports.run()(),
+	  prefixes= process.argv.splice(2),
+	  r= module.exports.run({prefixes})(),
 	  json= JSON.stringify(r)
 	console.log(json)
 }
-module.exports= function run(){
-	return module.exports.run()
+
+module.exports= function run(opts){
+	return module.exports.run(opts)
 }
 module.exports.run= run
 module.exports.main= main
