@@ -90,7 +90,7 @@ module.exports.main= main
 module.exports.autoPrefix= autoPrefix
 
 if( require.main=== module){
+	process.on("unhandledRejection", console.error)
 	module.exports.main()
 }
 
-process.on("unhandledRejection", console.error)
