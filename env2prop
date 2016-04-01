@@ -1,25 +1,29 @@
 #!/usr/bin/env node
 "use strict"
 
-function envToProp( env, opts){
+function envToProp(opts){
 	var
-	  fragments = env.split( "_"),
-	  prefixes= opts&& opts.prefixes&& opts.prefixes.map(p=> p.toUpperCase()),
-	  prefixIndex= prefixes&& prefixes.indexOf(fragments[0]),
-	  prefix= prefixIndex!== -1 && prefixes[prefixIndex]
-	if(prefix){
-		fragments.shift()
-	}
-	for(var i= 0; i< fragments.length; ++i){
+	  prefixes= opts&& opts.prefixes&& opts.prefixes.map(p=> new RegExp(p, "i")),
+	return function envToProp(env){
 		var
-		  fragment= fragments[ i].toLowerCase()
-		if(i > 0){
-			fragment= fragment.charAt( 0).toUpperCase() + fragment.substring( 1)
+		  fragments = env.split( "_"),
+		  first= fragments[0],
+		  prefixIndex= prefixes&& prefixes.filter(p=> p.test(first)),
+		  prefix= prefixIndex!== -1 && prefixes[prefixIndex]
+		if(prefix){
+			fragments.shift()
 		}
-		fragments[i]= fragment
+		for(var i= 0; i< fragments.length; ++i){
+			var
+			  fragment= fragments[ i].toLowerCase()
+			if(i > 0){
+				fragment= fragment.charAt( 0).toUpperCase() + fragment.substring( 1)
+			}
+			fragments[i]= fragment
+		}
+		var res= fragments.join("")
+		return prefixes? (prefix? [res, prefix]: [res]): res
 	}
-	var res= fragments.join("")
-	return prefixes? (prefix? [res, prefix]: [res]): res
 }
 
 module.exports= envToProp

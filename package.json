@@ -15,5 +15,8 @@
 		"url": "https://archive.voodoowarez.com/env2prop"
 	},
 	"author": "rektide de la faye",
-	"license": "X"
+	"license": "X",
+	"devDependencies": {
+		"tape": "^4.5.1"
+	}
 }
