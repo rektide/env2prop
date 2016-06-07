@@ -9,7 +9,7 @@ function envToProp( opts){
 		var
 		  fragments = env.split( "_"),
 		  first= fragments[0],
-		  prefixIndexes= prefixes&& prefixes.filter(p=> p.test(first)),
+		  prefixIndexes= prefixes&& prefixes.filter(p=> p.test(first))|| [],
 		  prefix= null
 		if(prefixIndexes.length){
 			prefix= fragments.shift().toLowerCase()
